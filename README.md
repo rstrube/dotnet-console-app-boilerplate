@@ -26,7 +26,7 @@ The diagram below outlines the high level architecture of the console applicatio
 
 The initialization logic leverages the new .NET `HostApplicationBuilder` (as opposed to using the older `IHostBuilder`).  You can examine the code in [Program.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Program.cs) to better understand the initialization steps.  You'll most likely want to extend the services that are registered for dependency injection purposes, and/or register additional configuration objects. This is where the initialization and bootstrapping for the console application is contained.
 
-# Execution Logic
+## Execution Logic
 
 The execution logic is contained within a class that implements `IHostedService`.  You can examine the code in [AppHostedService.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/AppHostedService.cs).  This pattern of separating out the execution logic for the initialization logic is defined by the [.NET Generic Host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host).
 
