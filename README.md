@@ -36,7 +36,7 @@ The code also establishes the best practice of using strongly-typed configuratio
 
 ### Bored API Configuration
 
-This configuration object is used to configure the upstream API ([Bored API]((https://www.boredapi.com/))).  It also serves as an excellent example for how to define configuration for upstream APIs.
+This configuration object (in `appsettings.json`) is used to configure the upstream API ([Bored API]((https://www.boredapi.com/))).  It also serves as an excellent example for how to define configuration for upstream APIs.  This configuration is injected as `IOptions<BoredClientConfig>` into classes via dependency injection.
 
 ```
 "BoredClient": {
@@ -44,7 +44,7 @@ This configuration object is used to configure the upstream API ([Bored API]((ht
     "UseMock": false,
     "BaseAddress": "https://www.boredapi.com/",
     "ActivityPath": "api/activity"
-  },
+},
 ```
 
 * `PooledConnectionLifetime`: The length of time in minutes that connections will be pooled by a given `IHttpClient` instance.  Pooling connections improves overall performance, but can lead to complications if DNS entries change/go stale.  Setting this to a reasonable time (like 15 minutes) will ensure DNS changes will be propagated and taken into account within 15 minutes.  Please see [this article](https://learn.microsoft.com/en-us/dotnet/fundamentals/networking/http/httpclient-guidelines) for more information.
@@ -54,7 +54,7 @@ This configuration object is used to configure the upstream API ([Bored API]((ht
 
 ### Activity Parameter Configuration
 
-This configuration object defines a minimum and maximum number of participants that the console application will leverage when requesting an activity.  It will randomly select from between this range.  It mostly serves as an example for how to inject `IOptions<MyConfig>` objects (defined in `appsettings.json`) via dependency injection.
+This configuration object (in `appsettings.json`) defines a minimum and maximum number of participants that the console application will leverage when requesting an activity.  It will randomly select from between this range.  This configuration is injected as `IOptions<ActivityParamsConfig>` into classes via dependency injection.
 
 ```
 "ActivityParams": {
