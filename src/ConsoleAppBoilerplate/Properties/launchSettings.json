@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ConsoleAppBoilerplate": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
