@@ -3,9 +3,9 @@
 .NET Core has radically changed the way developers build console applications.  I was struggling to find a good "starter template" that contained all the key features I wanted in a modern .NET 6+ console application.  The features included with this boilerplate are:
 
 1. Uses the [.NET Generic Host](https://learn.microsoft.com/en-us/dotnet/core/extensions/generic-host) pattern which levearges both `HostApplicationBuilder` for initialization and `IHostedService` for the actual execution logic.  This provides much faster overall performance and makes it easier to call `async` logic.
-2. Uses a "layered" configuration architecture which allows developers to define a base `appsettings.json` file and layer down environemntal changes in `appsettings.{env}.json` files.
+2. Uses a "layered" configuration architecture which allows developers to define a base `appsettings.json` file and layer down environmental changes in `appsettings.{env}.json` files.
 3. Already wired-up for dependency injection.  Easy to extend with your own interfaces and services.
-4. Leverages the `IOptions<MyConfig>` cofiguration architecture where you can define complex configuation objects in `appsettings.json` files.
+4. Leverages the `IOptions<XXX>` cofiguration architecture where you can define complex configuation objects in `appsettings.json` files and have them injected as `IOptions<XXX>` instances via dependency injection.
 5. Preconfigured with [Serilog](https://serilog.net/), an excellent logging framework for .NET Core.
 
 ## Example Logic In Boilerplate
@@ -14,9 +14,8 @@ This boilerplate console application contains execution logic which makes a REST
 
 1. Demonstrates how to differentiate between upstream data models and service models and how to extrapolate and map between the two.
 2. Demonstrates how to compartmentalize the upstream client code and wrap it via a C# service.
-3. Demonstrates best practices for calling upstream REST APIs using .NETs `IHttpClient` and supporting extension methods.
+3. Demonstrates best practices for calling upstream REST APIs using .NET's `IHttpClient` and supporting extension methods.
 4. Demonstrates how to create a "mock" client for an upstream API.  This "mock" client will not actually make a call to the upstream API, but it will return data in the same structure.  This can be useful for when access to an API is intermittent and/or the upstream API is still in active development.
-5. Uses a free, public API [Bored API](https://www.boredapi.com/) as a demonstration of how to wrap an upstream API.
 
 The diagram below outlines the high level architecture of the console application boilerplate:
 
@@ -24,7 +23,7 @@ The diagram below outlines the high level architecture of the console applicatio
 
 ## Initialization
 
-The initialization logic leverages the new .NET `HostApplicationBuilder` (as opposed to using the older `IHostBuilder`).  You can examine the code in [Program.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Program.cs) to better understand the initialization steps.  You'll most likely want to extend the services that are registered for dependency injection purposes, and/or register additional configuration objects. This is where the initialization and bootstrapping for the console application is contained.
+The initialization logic leverages the new .NET `HostApplicationBuilder` (as opposed to using the older `IHostBuilder`).  You can examine the code in [Program.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Program.cs) to better understand the initialization steps.  You'll most likely want to register additional services for dependency injection purposes, and also register additional configuration objects.
 
 ## Execution Logic
 
@@ -32,7 +31,7 @@ The execution logic is contained within a class that implements `IHostedService`
 
 ## Configuration
 
-The code also establishes the best practice of using strongly-typed configuration objects that can be injected using dependency injection.  In the boilerplate code base we have strongly typed configuration objects for both activity parameter configuration [ActivityParamsConfig.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Configuration/ActivityParamsConfig.cs) and for the upstream API we are wrapping [BoreClientConfig.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Configuration/BoredClientConfig.cs) (for [Bored API](https://www.boredapi.com/)).  These classes directly tie configuration objects that are locate in `appsettings.json` to strongly typed `IOptions<MyConfig>` objects that can be passed in via dependency injection into constructors.
+The code also establishes the best practice of using strongly-typed configuration objects that can be injected using dependency injection as `IOptions<XXX>` instances.  In the boilerplate code base we have strongly typed configuration objects for both activity parameter configuration [ActivityParamsConfig.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Configuration/ActivityParamsConfig.cs) and for the upstream API we are wrapping [BoreClientConfig.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Configuration/BoredClientConfig.cs) (for [Bored API](https://www.boredapi.com/)).  These classes directly tie configuration objects that are locate in `appsettings.json` to strongly typed `IOptions<XXX>` objects that can be passed in via dependency injection into class constructors.
 
 ### Bored API Configuration
 
