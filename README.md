@@ -102,7 +102,8 @@ Then simply enter `dotnet run`.
 
 ![Running in VSCode Using Built in Terminal](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/doc/img/run-vscode.png)
 
-This provides a true 
+This provides a very direct representation of how the console application will run outside of VSCode.
+
 #### Running via VSCode using Debugger
 
 This approach will allow you to run and debug the console application directly in VSCode (e.g. this will allow you to set breakpoints, etc.).  To do this navigate to the "Run and Debug" pane, and then click on the green run button labeled ".NET Core Launch (conole)".  This will start the application in debug mode.  Any output from the application will be presented in the "Debug Console".
