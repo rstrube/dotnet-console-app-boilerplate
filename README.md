@@ -71,3 +71,40 @@ Microsoft provided a the `Microsoft.AspNet.WebApi.Client` library which included
 This console application also demonstrates how to separate out the the upstream data models, from the data models you want to work with in your console application's execution logic. It does this by introducinng a C# service [ActivityService.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Services/ActivityService.cs) which wraps all upstream interaction via the [IBoredClient.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Upstream/IBoredClient.cs) client.
 
 [BoredActivity.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Upstream/Models/BoredActivity.cs) represents the upstream model, and [Activity.cs](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/src/ConsoleAppBoilerplate/Services/Models/Activity.cs) represents the simplified data model that's exposed to the console application via the C# service.  You'll also notice that the `Activity` class extrapolates some data (specifically the accessibility score) into a string value `Easy` `Intermediate` or `Hard`.  This demonstrates how to take an upstream data model and enhance / extrapolate the data for your own business logic.
+
+## Running the Console Applications
+
+This console application has been preconfigured so that it's easy to run via both VSCode and Visual Studio.
+
+### Running via Visual Studio
+
+Running via Visual Studio is straightforward.  Open up the solution, and click on the green start debugging button for "ConsoleAppBoilerplate":
+
+![Running in Visual Studio](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/doc/img/run-vs.png)
+
+Because this is a console application, it will open up a console and print the output directly to the console.  You should see something like:
+
+![Running in Visual Studio Console in Displayed](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/doc/img/run-vs-console.png)
+
+It's also worth noting that the standard launch profile for Visual Studio sets the `DOTNET_ENVIRNOMENT` variable to `Development`.  This environment affects the application initialization including which `appsettings.{env}.json` to "layer down".  In this case running the application via Visual Studio will "layer down" `appsettings.Development.json` ontop of `appsettings.json`.
+
+![Running in Visual Studio Default Launch Profile](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/doc/img/run-vs-launch-profile.png)
+
+### Running via VSCode
+
+Running via VSCode is also straightforward.  There are two main approaches:
+
+#### Running via VSCode using Built in Terminal
+
+This approach will allow you to run the console application in "normal mode" (e.g. without being about to debug the application).  To do this, open up the built in Terminal within VSCode (you can use either Powershell or Gitbash), and then navigate to the main project directory (e.g. `{path to}/src/ConsoleAppBoilerplate`).
+
+Then simply enter `dotnet run`.
+
+![Running in VSCode Using Built in Terminal](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/doc/img/run-vscode.png)
+
+This provides a true 
+#### Running via VSCode using Debugger
+
+This approach will allow you to run and debug the console application directly in VSCode (e.g. this will allow you to set breakpoints, etc.).  To do this navigate to the "Run and Debug" pane, and then click on the green run button labeled ".NET Core Launch (conole)".  This will start the application in debug mode.  Any output from the application will be presented in the "Debug Console".
+
+![Running in VSCode with Debugger](https://github.com/rstrube/dotnet-console-app-boilerplate/blob/main/doc/img/run-vscode-debug.png)
